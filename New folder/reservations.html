@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike Rental Reservation</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #0f1416, #2d373a, #666f73);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 28px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff45;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+    <header>Bike Rental Reservation</header>
+    <div class="container">
+        <h2>Make a Bike Rental Reservation</h2>
+        <form id="reservation-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required>
+            
+            <label for="date">Reservation Date:</label>
+            <input type="date" id="date" name="date" required>
+            
+            <label for="bike-type">Bike Type:</label>
+            <select id="bike-type" name="bike-type" required>
+                <option value="Mountain Bike">Mountain Bike</option>
+                <option value="Road Bike">Road Bike</option>
+                <option value="City Bike">City Bike</option>
+                <option value="Electric Bike">Electric Bike</option>
+            </select>
+            
+            <label for="duration">Rental Duration (hours):</label>
+            <input type="number" id="duration" name="duration" min="1" required>
+            
+            <label for="special-requests">Special Requests:</label>
+            <textarea id="special-requests" name="special-requests" rows="4"></textarea>
+            
+            <button type="submit">Submit Reservation</button>
+        </form>
+        
+        <div id="confirmation" style="display: none;">
+            <h2>Reservation Confirmation</h2>
+            <p>Thank you for your bike rental reservation! Details:</p>
+            <p>Name: <span id="confirmed-name"></span></p>
+            <p>Email: <span id="confirmed-email"></span></p>
+            <p>Date: <span id="confirmed-date"></span></p>
+            <p>Bike Type: <span id="confirmed-bike-type"></span></p>
+            <p>Rental Duration (hours): <span id="confirmed-duration"></span></p>
+            <p>Special Requests: <span id="confirmed-special-requests"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("reservation-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            // Get user input
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const date = document.getElementById("date").value;
+            const bikeType = document.getElementById("bike-type").value;
+            const duration = document.getElementById("duration").value;
+            const specialRequests = document.getElementById("special-requests").value;
+
+            // Display confirmation
+            document.getElementById("confirmed-name").textContent = name;
+            document.getElementById("confirmed-email").textContent = email;
+            document.getElementById("confirmed-date").textContent = date;
+            document.getElementById("confirmed-bike-type").textContent = bikeType;
+            document.getElementById("confirmed-duration").textContent = duration;
+            document.getElementById("confirmed-special-requests").textContent = specialRequests;
+
+            document.getElementById("reservation-form").style.display = "none";
+            document.getElementById("confirmation").style.display = "block";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Sun Cycling Admin</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #0f1416, #2d373a, #666f73);
+            color: white;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #333;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Navigation styling */
+        nav {
+            background-color: #333;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav li {
+            margin: 0 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        /* Main content styling */
+        main {
+            padding: 20px;
+        }
+
+        section {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Active section styling */
+        section.active {
+            display: block;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .metrics {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .metric {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .metric h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .metric p {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Add styling for the Rentals section */
+
+        #rentals-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .rentals-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .rentals-table th,
+        .rentals-table td {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            text-align: left;
+        }
+
+        .rentals-table th {
+            background-color: #333;
+            color: white;
+        }
+
+        .rentals-table tbody tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .rentals-table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        /* Add styling for the Inventory section */
+
+#inventory-section {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.inventory-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.inventory-list li {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.inventory-list h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.inventory-list p {
+    font-size: 14px;
+    color: #555;
+}
+/* Add styling for the User Profile section */
+#profile-section {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+#profile-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#profile-details h2 {
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+#profile-details p {
+    font-size: 16px;
+    color: #ccc;
+    margin: 5px 0;
+}
+
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Sun Cycling Dashboard</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#" id="dashboard">Analytics</a></li>
+            <li><a href="#" id="rentals">Rentals</a></li>
+            <li><a href="#" id="inventory">Inventory</a></li>
+        </ul>
+    </nav>
+    <main>
+        <!-- User Profile Section -->
+        <aside id="profile-section">
+            <div id="profile-avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div id="profile-details">
+                <h2 id="user-name">User Name</h2>
+                <p><i>admin</i></p>
+            </div>
+        </aside>
+
+        <section id="dashboard-section" class="active">
+            <h2>Analytics Dashboard</h2>
+            <div class="metrics">
+                <div class="metric">
+                    <h3>Users</h3>
+                    <p id="userCount">0</p>
+                </div>
+                <div class="metric">
+                    <h3>Views</h3>
+                    <p id="viewCount">0</p>
+                </div>
+                <div class="metric">
+                    <h3>Shares</h3>
+                    <p id="shareCount">0</p>
+                </div>
+                <div class="metric">
+                    <h3>Click
+</h3>
+                        <p id="clickCount">0</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="rentals-section" class="active">
+                <h2>Rentals</h2>
+                <table class="rentals-table">
+                    <thead>
+                        <tr>
+                            <th>Bike Name</th>
+                            <th>Rental Date</th>
+                            <th>Duration</th>
+                            <th>User</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mountain Bike</td>
+                            <td>2023-09-25</td>
+                            <td>2 hours</td>
+                            <td>User 1</td>
+                        </tr>
+                        <tr>
+                            <td>Road Bike</td>
+                            <td>2023-09-24</td>
+                            <td>3 hours</td>
+                            <td>User 2</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </section>
+            
+            <section id="inventory-section">
+                <h2>Inventory</h2>
+                <ul class="inventory-list">
+                    <li>
+                        <h3>Bike 1</h3>
+                        <p>Quantity: 10</p>
+                    </li>
+                    <li>
+                        <h3>Bike 2</h3>
+                        <p>Quantity: 5</p>
+                    </li>
+                    <li>
+                        <h3>Bike 3</h3>
+                        <p>Quantity: 8</p>
+                    </li>
+                    <!-- Add more inventory items here -->
+                </ul>
+            </section>
+            
+    </main>
+  
+<script>
+const dashboardLink = document.getElementById('dashboard');
+const rentalsLink = document.getElementById('rentals');
+const inventoryLink = document.getElementById('inventory');
+const dashboardSection = document.getElementById('dashboard-section');
+const rentalsSection = document.getElementById('rentals-section');
+const inventorySection = document.getElementById('inventory-section');
+
+// Function to show a specific section and hide others
+function showSection(sectionToShow) {
+    dashboardSection.classList.remove('active');
+    rentalsSection.classList.remove('active');
+    inventorySection.classList.remove('active');
+    sectionToShow.classList.add('active');
+}
+
+// Add event listeners to navigation links
+dashboardLink.addEventListener('click', function () {
+    showSection(dashboardSection);
+});
+
+rentalsLink.addEventListener('click', function () {
+    showSection(rentalsSection);
+});
+
+inventoryLink.addEventListener('click', function () {
+    showSection(inventorySection);
+});
+
+const userFirstName = localStorage.getItem('userFirstName');
+
+// Update the user's name in the profile section
+const userNameElement = document.getElementById('user-name');
+if (userFirstName) {
+    userNameElement.textContent = userFirstName;
+}
+
+
+</script>
+
+</body>
+</html>

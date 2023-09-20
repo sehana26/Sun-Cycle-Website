@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <style>
+      body {
+        text-align: center;
+        padding: 2em 0;
+        background: linear-gradient(to right, #0f1416, #2d373a, #666f73);
+        background-position: auto;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      header {
+        font-size: 50px;
+        color: white;
+        
+      }
+
+      .container {
+        width: 300px;
+        padding: 20px;
+        border: 2px solid white;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+      }
+
+      .Email, .Password {
+        margin: 10px 0;
+      }
+
+      input {
+        width: 50%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      .button {
+        margin-top: 10px;
+      }
+
+      button {
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 10px;
+        width: 100%;
+      }
+
+      button[type="reset"] {
+        background-color: rgb(41, 38, 38);;
+      }
+      button[type="submit"] {
+        background-color: rgb(41, 38, 38);;
+      }
+
+      #successMessage {
+        display: none;
+        font-size: 24px;
+        color: black;
+        margin-top: 20px;
+      }
+
+      .error-message {
+        color: red;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <title>Sun Cycling; Login</title>
+    <link rel="icon" type="image/x-icon" href="1.png">
+  <body>
+    
+    <div class="container">
+        <header>Log In</header>
+      <form id="myForm">
+        <div class="Email">
+          <input type="email" placeholder="Email Address" id="email">
+          <div id="emailError" class="error-message"></div>
+        </div>
+        <div class="Password">
+          <input type="password" placeholder="Password" id="password">
+          <div id="passwordError" class="error-message"></div>
+        </div>
+        <div class="button">
+          <button type="submit">Log In</button>
+        </div>
+        <div class="button">
+          <button type="reset" id="resetButton">Reset</button>
+        </div>
+      </form>
+    </div>
+    <script>
+       document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("myForm");
+            const emailInput = document.getElementById("email");
+            const passwordInput = document.getElementById("password");
+            const emailError = document.getElementById("emailError");
+            const passwordError = document.getElementById("passwordError");
+        
+            // Attach the resetForm function to the Reset button
+            document.getElementById("resetButton").addEventListener("click", function () {
+                resetForm();
+            });
+        
+            function resetForm() {
+                emailInput.value = "";
+                passwordInput.value = "";
+                emailError.innerText = "";
+                passwordError.innerText = "";
+            }
+        
+            form.addEventListener("submit", function (event) {
+                event.preventDefault(); // Prevent form submission
+                let isValid = true;
+        
+                // Check if email is empty
+                if (emailInput.value.trim() === "") {
+                    emailError.innerText = "Email is required";
+                    isValid = false;
+                } else {
+                    emailError.innerText = "";
+                }
+        
+                // Check if password is empty
+                if (passwordInput.value.trim() === "") {
+                    passwordError.innerText = "Password is required";
+                    isValid = false;
+                } else {
+                    passwordError.innerText = "";
+                }
+        
+                if (!isValid) {
+                    return;
+                }
+        
+                // Retrieve user registration data from local storage
+                const storedEmail = localStorage.getItem("userEmail");
+                const storedPassword = localStorage.getItem("userPassword");
+        
+                // Check if the entered email and password match the stored values
+                if (emailInput.value === storedEmail && passwordInput.value === storedPassword) {
+                    // Redirect to the desired link on successful login
+                    window.location.href = "admin.html";
+                } else {
+                    emailError.innerText = "Invalid email or password";
+                    passwordError.innerText = "Invalid email or password";
+                }
+            });
+        
+            // Reset error messages when inputs change
+            emailInput.addEventListener("input", function () {
+                emailError.innerText = "";
+            });
+        
+            passwordInput.addEventListener("input", function () {
+                passwordError.innerText = "";
+            });
+        });
+    </script>
+  </body>
+</html>

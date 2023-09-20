@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    * {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  padding: 10px;
+  background: linear-gradient(to right, #0f1416, #2d373a, #666f73);
+}
+/* Header/Blog Title */
+.header {
+  text-align: center;
+  background: white;
+}
+
+/* .header h1 {}*/
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  text-align: center; /* Center-align the navigation links */
+}
+
+/* Style the topnav links */
+.topnav a {
+  display: inline-block;
+  list-style: outside none none;
+  margin: .5em 1em;
+  padding: 0;
+  color: peachpuff;
+  position: relative;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.topnav a::before,
+.topnav a::after {
+  content: '';
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  transition: all .35s ease;
+  opacity: 0;
+}
+
+.topnav a::before {
+  content: '';
+  right: 0;
+  top: 0;
+  border-top: 3px solid peachpuff;
+  border-right: 3px solid peachpuff;
+  transform: translate(-100%, 50%);
+}
+
+.topnav a:after {
+  content: '';
+  left: 0;
+  bottom: 0;
+  border-bottom: 3px solid peachpuff;
+  border-left: 3px solid peachpuff;
+  transform: translate(100%, -50%)
+}
+
+.topnav a:hover:before,
+.topnav a:hover:after {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+.topnav a:hover {
+  color:pink;
+}
+.home .home-text{
+ 	text-align: left;
+ 	position: relative;
+ 	z-index: 2;
+ }
+
+.home .home-text p{
+	margin:0;
+	overflow: hidden;
+}
+.home .home-text p span{
+    font-size: 60px;
+    color:pink;
+    font-weight: 500;
+    display: inline-block;
+    line-height: 76px;
+    display: none;
+}
+
+.home .home-text p span.text-in{
+	display: block;
+	animation: textIn .5s ease;
+}
+.home .home-text p span.text-out{
+	animation: textOut .5s ease;
+}
+
+@keyframes textIn{
+	0%{
+		transform: translateY(100%);
+	}
+	100%{
+		transform: translateY(0%);
+	}
+}
+@keyframes textOut{
+	0%{
+		transform: translateY(0%);
+	}
+	100%{
+		transform: translateY(-100%);
+
+	}
+}
+/* CSS */
+.button-86 {
+  all: unset;
+  width: 100px;
+  height: 30px;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  position: relative;
+  color: whitesmoke;
+  cursor: pointer;
+  z-index: 1;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-86::after,
+.button-86::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -99999;
+  transition: all .4s;
+}
+
+.button-86::before {
+  transform: translate(0%, 0%);
+  width: 100%;
+  height: 100%;
+  background: #28282d;
+  border-radius: 10px;
+}
+
+.button-86::after {
+  transform: translate(10px, 10px);
+  width: 35px;
+  height: 35px;
+  background: pink;
+  color: #28282d;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 50px;
+}
+
+.button-86:hover::before {
+  transform: translate(5%, 20%);
+  width: 110%;
+  height: 110%;
+}
+
+.button-86:hover::after {
+  border-radius: 10px;
+  transform: translate(0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+.button-86:active::after {
+  transition: 0s;
+  transform: translate(0, 5%);
+}
+.button-27 {
+  appearance: none;
+  background-color: peachpuff;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  will-change: transform;
+}
+
+.button-27:disabled {
+  pointer-events: none;
+}
+
+.button-27:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button-27:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+/* Dropdown container */
+.dropdown {
+  position: below;
+  display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {   
+  float: left;
+  width: 80%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 20%;
+  background-color:rgba(255, 218, 185, 0.182);
+  padding-left: 20px;
+}
+.logo{
+  float: left;
+}
+
+/* Fake image */
+.fakeimg {
+
+  width: 100%;
+  text-align: right;
+}
+
+/* Add a card effect for articles */
+.card {
+ 
+  padding: 20px;
+  margin-top: 20px;
+  display: inline-block;
+
+}
+.card a{
+    text-decoration: none;
+    color: pink;
+}
+/* Clear floats after the columns */
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+    margin: 0%;
+    
+  }
+}
+  </style>
+<head>
+	<title>Sun Cycling PH</title>
+    <link rel="icon" type="image/x-icon" href="1.png">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+    
+<body>
+  <div class="header">
+    <h1></h1>
+  </div>
+
+<div class="topnav">
+  <div class="logo"> <img src="1.png" alt="logot" style ="width:80px;height:80px;"></div>
+  <a href="#" onclick="location.href='index.html'" >Home</a>
+  <div class="dropdown">
+    <a href="#" class="dropbtn">Pricing <i class="fa fa-caret-down"></i></a>
+    <div class="dropdown-content">
+      <h2>Pricing</h2>
+      
+      <h3>Standard Plan</h3>
+      <p>Price: $XX per month</p>
+      <p>Features:</p>
+      <ul>
+        <li>Less 10% for 5th Rental</li>
+        <li>Access to Perks</li>
+      </ul>
+  
+      <h3>Premium Plan</h3>
+      <p>Price: $XX per month</p>
+      <p>Features:</p>
+      <ul>
+        <li>Rent a bike for a month</li>
+        <li>Inclusive of Upgrades</li>
+        <!-- Add more features as needed -->
+      </ul>
+  
+      <h3>Enterprise Plan</h3>
+      <p>Contact us for a customized quote.</p>
+  
+      <!-- Add more pricing plans as needed -->
+  
+    </div>
+  </div>
+  
+  <div class="dropdown">
+    <a href="#" class="dropbtn">Shop <i class="fa fa-caret-down"></i></a>
+    <div class="dropdown-content">
+      <a href="#">Bikes</a>
+      <a href="#">Accessories</a>
+      <a href="#">Apparel</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <a href="#" class="dropbtn">Safety Rules </a>
+    <div class="dropdown-content">
+      <a href="#">Ride Defensively</a>
+      <a href="#">Inspect Bike</a>
+      <a href="#">Follow Rental Terms</a>
+    </div>
+  </div>
+  
+  <div class="dropdown">
+    <a href="#" class="dropbtn">Contact</a>
+    <div class="dropdown-content">
+      <a href="#">Email: contact@example.com</a>
+      <a href="#">Phone: +1 (123) 456-7890</a>
+      <a href="#">Address: 123 Main Street, City</a>
+      
+    </div>
+  </div>
+  <button float="right" class="button-27" role="button" onclick="location.href='signup.html'">Log in</button> 
+</div>
+
+<div class="row">
+  <div class="leftcolumn">
+    
+   <div class="fakeimg" style="height:200px;"> <img src="5.png" float=right style="width:750px;height:700px;" ></div>
+   
+  <section class="home">
+    <div class="home-text">
+      <p class="animate-text">
+        <span>Ride With Friends</span>
+        <span>Explore the City</span>
+        <span>Upgrade your Comfort</span>
+        <span>Enjoy the Scenery</span>
+        <span>Breathe and Relax</span>
+        <h1 style="color: peachpuff">         with Sun Cycling</h1>
+        <p style="color:  peachpuff" ><i>   Biggest bike rental  <br>   platform in the Philippines </br> </i></p>
+      </p> 
+     </div>
+</section>
+<p> </p>
+<p> </p>
+<button class="button-86" onclick="location.href='Rent.html'" role="button">Rent Now</button>
+
+  </div>
+      
+  <div class="rightcolumn">
+    <div class="card">
+     
+        <div class="fakeimg2" style="height:100px;"><img src="3.png" float=right style="width:80px;height:80px;" ></div>
+        <h3><a href="#" onclick="location.href='reservations.html'">Quick Reservation</a></h3>
+        <p style="color: whitesmoke">Secure a slot for future rentals.</p>
+        <div class="fakeimg2" style="height:100px;"><img src="2.png" float=right style="width:80px;height:80px;" ></div>
+        <h3><a href="#">Branches</a></h3>
+        <p style="color: whitesmoke">Available regions for Sun Cycling</p>
+        <div class="fakeimg2" style="height:100px;"><img src="4.png" float=right style="width:80px;height:80px;" ></div>
+        <h3><a href="#">Different Models</a></h3>
+        <p style="color: whitesmoke">Bike choices for enthusiasts and amateurs.</p>
+
+     
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <h2></h2>
+</div>
+ 
+<script>
+         const txts=document.querySelector(".animate-text").children,
+               txtsLen=txts.length;
+           let index=0;
+          const textInTimer=3000,
+                textOutTimer=2800;
+
+         function animateText() {
+            for(let i=0; i<txtsLen; i++){
+              txts[i].classList.remove("text-in","text-out");  
+            }
+            txts[index].classList.add("text-in");
+
+            setTimeout(function(){
+                txts[index].classList.add("text-out");              
+            },textOutTimer)
+
+            setTimeout(function(){
+
+              if(index == txtsLen-1){
+                  index=0;
+                }
+               else{
+                   index++;
+                 }
+                animateText();
+            },textInTimer); 
+         }
+         
+         window.onload=animateText;
+   
+</script>
+
+</body>
+</html>

@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sun Cycling PH</title>
+    <link rel="icon" type="image/x-icon" href="1.png">
+
+   
+</head>
+<header style="text-align: center; margin-top: 50px">
+    <h1 style="color: pink;"></h1>
+</header>
+<body>
+    
+    <div id="file3-content">
+        <link rel="stylesheet"  href="html1.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <div class="container">
+            <h2>Rate per Bike Type</h2>
+            <ul id="bikeList">
+                <li class="bike-item">
+                    <span class="bike-name">Mountain Bike  </span>
+                    <span class="bike-details">
+                        <p > <i class="fa-solid fa-gauge"> </i>Single Speed </p>
+                        <p>   <i class="fa-solid fa-gears"></i>Coaster Break</p>
+                        <p>   <i class="fa-solid fa-circle-up"></i>Padded Seat</p>
+                        <p>  <i class="fa-solid fa-person-biking"></i> Upright Riding Position</p>
+                    </span>
+                    
+                    <span class="bike-price">$20 per day</span>
+                    <button class="rent-button" onclick="selectBike('Mountain Bike', 20)">Rent</button>
+                </li>
+                <li class="bike-item">
+                    <span class="bike-name">Road Bike</span>
+                    <span class="bike-details"> 
+                        <p>   <i class="fa-solid fa-gears"></i>Coaster Break</p>
+                        <p>   <i class="fa-solid fa-circle-up"></i>Padded Seat</p>
+                        <p>  <i class="fa-solid fa-person-biking"></i> Upright Riding Position</p>
+                    </span>
+                    <span class="bike-price">$15 per day</span>
+                    <button class="rent-button" onclick="selectBike('City Bike', 15)">Rent</button>
+                </li>
+                <li class="bike-item">
+                    <span class="bike-name">City Bike  </span>
+                        <span class="bike-details"> 
+                        <p>   <i class="fa-solid fa-gears"></i>Coaster Break</p>
+                        <p>   <i class="fa-solid fa-circle-up"></i>Padded Seat</p>
+                    </span>
+                    <span class="bike-price">$10 per day</span>
+                    <button class="rent-button" onclick="selectBike('City Bike', 15)">Rent</button>
+                </li>
+            </ul>
+    
+            <h2>Your Selection</h2>
+            <ul id="selectedBikes"></ul>
+            <p id="totalCost"></p>
+            <button id="rentButton" onclick="rentBikes()">Rent Selected Bikes</button>
+        </div>
+        <!-- ... (previous HTML code) -->
+
+
+    
+        <script>
+            let selectedBikes = [];
+    
+            function selectBike(name, price) {
+                selectedBikes.push({ name, price });
+                updateSelectedBikesList();
+            }
+    
+            function updateSelectedBikesList() {
+                const selectedBikesList = document.getElementById("selectedBikes");
+                selectedBikesList.innerHTML = "";
+    
+                let totalCost = 0;
+    
+                selectedBikes.forEach((bike, index) => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `${bike.name} - $${bike.price} per day`;
+                    selectedBikesList.appendChild(listItem);
+    
+                    totalCost += bike.price;
+                });
+    
+                document.getElementById("totalCost").textContent = `Total Cost: $${totalCost.toFixed(2)}`;
+            }
+    
+            function rentBikes() {
+                if (selectedBikes.length === 0) {
+                    alert("Please select at least one bike to rent.");
+                } else {
+                    alert(`Thank you for renting ${selectedBikes.length} bike(s)!`);
+                    // Add further logic for processing the rental, e.g., updating user account, database, etc.
+                    selectedBikes = [];
+                    updateSelectedBikesList();
+                }
+            }
+            function rentBikes() {
+                if (selectedBikes.length === 0) {
+                    alert("Please select at least one bike to rent.");
+                } else {
+                    // Display a form for payment information (you can replace this with your own payment processing logic)
+                    showPaymentForm();
+                }
+            }
+
+            // Continue from previous code
+// ...
+
+function showPaymentForm() {
+    const checkoutForm = document.createElement("form");
+    checkoutForm.id = "checkout-form";
+    checkoutForm.innerHTML = `
+        <h2>Payment Information</h2>
+        <label for="card-number">Card Number:</label>
+        <input type="text" id="card-number" name="card-number" required>
+        <label for="expiration-date">Expiration Date:</label>
+        <input type="text" id="expiration-date" name="expiration-date" required>
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" required>
+
+        <!-- Add address fields -->
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required>
+        <label for="postal-code">Postal Code:</label>
+        <input type="text" id="postal-code" name="postal-code" required>
+        
+        <button type="submit">Complete Rental</button>
+    `;
+    checkoutForm.addEventListener("submit", completeRental);
+    document.getElementById("file3-content").appendChild(checkoutForm);
+}
+
+function completeRental(e) {
+    e.preventDefault();
+    const cardNumber = document.getElementById("card-number").value;
+    const expirationDate = document.getElementById("expiration-date").value;
+    const cvv = document.getElementById("cvv").value;
+    
+    // Address information
+    const address = document.getElementById("address").value;
+    const city = document.getElementById("city").value;
+    const postalCode = document.getElementById("postal-code").value;
+
+    // Add your payment processing logic here (e.g., validate card information, charge the user, etc.)
+
+    // After successful payment, reset the selected bikes and update the UI
+    selectedBikes = [];
+    updateSelectedBikesList();
+
+    alert("Thank you for your payment! Your rental is complete.");
+    // You can also redirect the user to a confirmation page or take further actions as needed.
+}
+
+        </script>
+    </div>
+</body>
+</html>
+        </script>
+        </div>
+
+    <!-- Content from file2.html -->
+    <div id="file2-content">
+        <link rel="stylesheet"  href="html2.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+        <h1><i class=" fa fa-shopping-cart"></i></h1>
+        <section class="section2">
+            <div class="item">
+                <img src="bike5.png">
+                <p>Specialized S Works Diverge</p>
+                <p><i>Mountain Bike</i></p>
+                <h6>200/hr</h6>
+                <span></span>
+                <button>Rent Now</button>
+                
+            </div>
+            <div class="item">
+                <img src="bike6.png">
+                <p>Trekn Domane SL 7 </p>
+                <p><i>Mountain Bike</i></p>
+                <span></span>
+               
+            </div>
+            <div class="item">
+                <img src="bike7.png">
+                <p>Ibis Ripmo SLX </p>
+                <p><i>Mountain Bike</i></p>
+                <span></span>
+            </div>
+            <div class="item">
+                <img src="bike8.png">
+                <p>Yeti SB 140</p>
+                <p><i>Road Bike</i></p>
+                <span></span>
+            </div>
+        </section>
+
+        <section class="section3">
+            <div class="item">
+                <img src="bike9.png">
+                <p>StumpJumper Alloy</p>
+                <p><i>Road Bike</i></p>
+
+                <span></span>
+ 
+                
+            </div>
+            <div class="item">
+                <img src="bike10.png">
+                <p>Santa Cruz Tallboy</p>
+                <p><i>City Bike</i></p>
+      
+                <span></span>
+            
+            </div>
+            <div class="item">
+                <img src="bike11.png">
+                <p>Juliana Furtado 5</p>
+                <p><i>City Bike</i></p>
+     
+                <span></span>
+         
+            </div>
+            <div class="item">
+                <img src="bike12.png">
+                <p>Pivot Mach 4 SL</p>
+                <p><i>City Bike</i></p>
+            
+                <span></span>
+            
+            </div>
+        </section>
+        <section>
+            <div class="item">
+                <img src="bike1.png">
+                <p>Santa Cruz Megatower CC 0X1 Eagle</p>
+                <p><i> Air Carbon Mountain Bike</i></p>
+            
+			<!-- Image of the bike
+                <p > <i class="fa-solid fa-gauge"> </i> Single Speed </p>
+                <p>   <i class="fa-solid fa-gears"></i>Coaster Break</p>
+                <p>   <i class="fa-solid fa-circle-up"></i>Padded Seat</p>
+                <p>  <i class="fa-solid fa-person-biking"></i> Upright Riding Position</p>
+            -->
+
+                <span></span>
+            
+                
+            </div>
+            <div class="item">
+                <img src="bike2.png">
+                <p>Pinarello Dogma F</p>
+                <p><i>Road Bike</i></p>
+
+                <span></span>
+
+            </div>
+            <div class="item">
+                <img src="bike3.png">
+                <p>Cannondale Supersix Evo 6</p>
+                <p><i>Road Bike</i></p>
+ 
+                <span></span>
+     
+            </div>
+            <div class="item">
+                <img src="bike4.png">
+                <p>TREK EX FUEL GEN 6</p>
+                <p><i>Mountain Bike</i></p>
+      
+                <span></span>
+              
+            </div>
+        </section>
+
+        <div class="select">
+            
+        </div>
+    </div>
+
+   
+</body>
+</html>

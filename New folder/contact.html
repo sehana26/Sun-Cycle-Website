@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<style>
+  body {
+  margin: 0;
+  padding:0;
+  background: linear-gradient(to right, #0f1416, #2d373a, #666f73);
+}
+
+.console-container {
+ 
+  font-family:Khula;
+  font-size:4em;
+  text-align:center;
+  height:200px;
+  width:600px;
+  display:block;
+  position:absolute;
+  color:white;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
+}
+.console-underscore {
+   display:inline-block;
+  position:relative;
+  top:-0.14em;
+  left:10px;
+}
+
+ul {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+ul li {
+  list-style: none;
+}
+
+ul li a {
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 80px;
+  font-size: 35px;
+  margin: 0 10px;
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #fff;
+  z-index: 1;
+}
+
+ul li a .icon {
+  position: relative;
+  color: #262626;
+  transition: .5s;
+  z-index: 3;
+}
+
+ul li a:hover .icon {
+  color: #fff;
+  transform: rotateY(360deg);
+}
+
+ul li a:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f00;
+  transition: .5s;
+  z-index: 2;
+}
+
+ul li a:hover:before {
+  top: 0;
+}
+
+ul li:nth-child(1) a:before{
+  background: #3b5999;
+}
+
+ul li:nth-child(2) a:before{
+  background: #55acee;
+}
+
+ul li:nth-child(3) a:before {
+  background: #0077b5;
+}
+
+ul li:nth-child(4) a:before {
+  background: #dd4b39;
+}
+</style>
+<html>
+    <div class='console-container'><span id='text'></span><div class='console-underscore' id='console'>&#95;</div></div>
+
+  <body>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+<ul>
+  <li>
+    <a href="https://www.facebook.com/">
+      <i class="fab fa-facebook-f icon"></i>    </a>
+  </li>
+  <li>
+    <a href="https://twitter.com/login"><i class="fab fa-twitter icon"></i></a>
+  </li>
+  <li>
+    <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in icon"></i></a></li>
+  <li>
+    <a href="https://mail.google.com/mail/u/0/?pli=1#inbox"><i class="fab fa-google-plus-g icon"></i></a></li>
+</ul>
+<p>  </p>
+<p> </p>
+
+
+
+
+  </body>
+  <script> // function([string1, string2],target id,[color1,color2])    
+    consoleText(['Contact Us', 'Facebook', 'Twitter'], 'Gmail and LinkedIn',['tomato','rebeccapurple','lightblue']);
+   
+   function consoleText(words, id, colors) {
+     if (colors === undefined) colors = ['#fff'];
+     var visible = true;
+     var con = document.getElementById('console');
+     var letterCount = 1;
+     var x = 1;
+     var waiting = false;
+     var target = document.getElementById(id)
+     target.setAttribute('style', 'color:' + colors[0])
+     window.setInterval(function() {
+   
+       if (letterCount === 0 && waiting === false) {
+         waiting = true;
+         target.innerHTML = words[0].substring(0, letterCount)
+         window.setTimeout(function() {
+           var usedColor = colors.shift();
+           colors.push(usedColor);
+           var usedWord = words.shift();
+           words.push(usedWord);
+           x = 1;
+           target.setAttribute('style', 'color:' + colors[0])
+           letterCount += x;
+           waiting = false;
+         }, 1000)
+       } else if (letterCount === words[0].length + 1 && waiting === false) {
+         waiting = true;
+         window.setTimeout(function() {
+           x = -1;
+           letterCount += x;
+           waiting = false;
+         }, 1000)
+       } else if (waiting === false) {
+         target.innerHTML = words[0].substring(0, letterCount)
+         letterCount += x;
+       }
+     }, 120)
+     window.setInterval(function() {
+       if (visible === true) {
+         con.className = 'console-underscore hidden'
+         visible = false;
+   
+       } else {
+         con.className = 'console-underscore'
+   
+         visible = true;
+       }
+     }, 400)
+   }
+   </script>
+</html>
+

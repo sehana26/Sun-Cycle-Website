@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="1.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #0f1416, #2d373a, #666f73);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 28px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff45;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .profile-info, .my-rentals {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+        .profile-img {
+            display: block;
+            max-width: 200px;
+            margin: 0 auto;
+            border-radius: 50%;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        label {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>User Dashboard</header>
+    <div class="container">
+        <h1>Sun Cycle Renter</h1>
+        <div class="profile">
+            <img src="default-profile.png" alt="Profile Picture" class="profile-img" id="profile-img">
+            <label for="profile-picture">Upload Profile Picture</label>
+            <input type="file" id="profile-picture" accept="image/*" onchange="updateProfilePicture(this)">
+        </div>
+        <div class="profile-info">
+            <h2>Profile Information</h2>
+            <p id="profile-name">Name: Loading</p>
+            <p id="profile-email">Email: Loading</p>
+        </div>
+        <div class="my-rentals">
+            <h2>My Rentals</h2>
+            <ul id="rental-list">
+                <!-- Rental items will be dynamically added here -->
+            </ul>
+        </div>
+        <button type="button" id="logout-button" onclick="logoutUser()">Log Out</button>
+    </div>
+    
+    <script>
+          function updateProfilePicture(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const profileImg = document.getElementById('profile-img');
+                    profileImg.src = e.target.result;
+                }
+
+                reader.readAsDataURL(file);
+            }
+        }
+        // Retrieve user data from local storage
+        var userFirstName = localStorage.getItem("userFirstName");
+        var userLastName = localStorage.getItem("userLastName");
+        var userEmail = localStorage.getItem("userEmail");
+
+        // Check if the user data exists
+        if (userFirstName && userLastName && userEmail) {
+            // Display the user's name and email in the profile info section
+            var profileName = document.getElementById("profile-name");
+            var profileEmail = document.getElementById("profile-email");
+
+            profileName.textContent = "Name: " + userFirstName + " " + userLastName;
+            profileEmail.textContent = "Email: " + userEmail;
+        }
+
+        // Function to simulate user logout (clear local storage and redirect to login)
+        function logoutUser() {
+            localStorage.clear(); // Clear all data stored in local storage
+            window.location.href = "next2.html"; // Redirect to the login page
+        }
+
+        // Function to display user's rentals (this is just a placeholder)
+        function displayUserRentals() {
+            var rentalList = document.getElementById("rental-list");
+
+            // Example: Displaying fake rental data
+            var rentals = ["Rental 1", "Rental 2", "Rental 3"];
+
+            rentals.forEach(function (rental) {
+                var listItem = document.createElement("li");
+                listItem.textContent = rental;
+                rentalList.appendChild(listItem);
+            });
+        }
+
+        // Call the function to display user's rentals
+        displayUserRentals();
+    </script>
+</body>
+</html>
